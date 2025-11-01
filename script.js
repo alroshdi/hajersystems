@@ -118,8 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchGitHubRepos(username) {
     const projectsGrid = document.getElementById('projectsGrid');
     
+    // Repositories to exclude
+    const excludedRepos = ['hajeralroshdi.github.io', 'ai_workshop_app'];
+    // Repositories to prioritize (always include if available)
+    const prioritizedRepos = ['TaxAuthorityProject', 'predict_sales_lstm'];
+    const maxProjects = 3;
+    
     try {
-        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=18`);
+        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=12`);
         
         if (!response.ok) {
             throw new Error('Failed to fetch repositories');
@@ -136,15 +142,38 @@ async function fetchGitHubRepos(username) {
         
         projectsGrid.innerHTML = '';
         
-        // Only show these specific projects
-        const allowedProjects = ['predict_sales_lstm', 'ai_gan_fashion_project', 'ai_workshop_app'];
+        // Separate prioritized and regular repositories
+        const prioritizedProjects = [];
+        const regularProjects = [];
         
         repos.forEach(repo => {
-            // Only show projects in the allowed list
-            if (allowedProjects.includes(repo.name.toLowerCase()) && !repo.fork) {
-                const projectCard = createProjectCard(repo);
-                projectsGrid.appendChild(projectCard);
+            // Skip if repository is a fork or in excluded list
+            if (repo.fork || excludedRepos.includes(repo.name)) {
+                return;
             }
+            
+            // Prioritized repos can be included even without description
+            if (prioritizedRepos.includes(repo.name)) {
+                // Add fallback description if missing
+                if (!repo.description) {
+                    repo.description = 'A project showcasing technical skills and implementation.';
+                }
+                prioritizedProjects.push(repo);
+            } else {
+                // Regular repos need a description
+                if (repo.description) {
+                    regularProjects.push(repo);
+                }
+            }
+        });
+        
+        // Combine: prioritized first, then regular projects
+        const selectedProjects = [...prioritizedProjects, ...regularProjects].slice(0, maxProjects);
+        
+        // Create project cards
+        selectedProjects.forEach(repo => {
+            const projectCard = createProjectCard(repo);
+            projectsGrid.appendChild(projectCard);
         });
         
         // Observe new project cards for animation
@@ -167,21 +196,23 @@ function createProjectCard(repo) {
     const card = document.createElement('div');
     card.className = 'project-card';
     
-    // Use same color for all projects
-    const langColor = '#4A90E2';
-    
-    // Get project-specific icon
-    const projectIcons = {
-        'predict_sales_lstm': 'fas fa-chart-line',
-        'ai_gan_fashion_project': 'fas fa-tshirt',
-        'ai_workshop_app': 'fas fa-mobile-alt'
+    // Get language color
+    const languageColors = {
+        'Python': '#3776ab',
+        'JavaScript': '#f1e05a',
+        'Java': '#b07219',
+        'C#': '#239120',
+        'PHP': '#4F نسَخَ1',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'Jupyter Notebook': '#DA5B0B'
     };
     
-    const projectIcon = projectIcons[repo.name.toLowerCase()] || 'fas fa-code';
+    const langColor = languageColors[repo.language] || '#87CEEB';
     
     card.innerHTML = `
-        <div class="project-header" style="background: linear-gradient(135deg, ${langColor}, #5B9BD5);">
-            <i class="${projectIcon}"></i>
+        <div class="project-header" style="background: linear-gradient(135deg, ${langColor}, #E6E6FA);">
+            <i class="fas fa-project-diagram"></i>
             <h3>${repo.name}</h3>
         </div>
         <div class="project-body">
@@ -339,39 +370,6 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
-// ===== Contact Form Handler =====
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value;
-        
-        // Create mailto link
-        const mailtoLink = `mailto:hajeralroshdi99@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-        
-        // Open email client
-        window.location.href = mailtoLink;
-        
-        // Show success message
-        const submitBtn = this.querySelector('.btn-submit span');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = currentLang === 'en' ? 'Message Sent!' : 'تم الإرسال!';
-        submitBtn.parentElement.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
-        
-        // Reset after 3 seconds
-        setTimeout(() => {
-            this.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.parentElement.style.background = 'linear-gradient(135deg, var(--primary-pink), var(--primary-lavender))';
-        }, 3000);
-    });
-}
 
 console.log('Portfolio website loaded successfully! 🚀');
 
