@@ -345,7 +345,7 @@
             <div class="contact-container">
                 <!-- Contact Form - Left Side -->
                 <div class="contact-form-wrapper slide-up">
-                    <form id="contactForm" class="contact-form">
+                    <form id="contactForm" class="contact-form" enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name" data-en="Your Name" data-ar="اسمك">Your Name</label>
@@ -366,7 +366,7 @@
                                 <textarea id="message" name="message" rows="3" required placeholder="Tell me about your project..."></textarea>
                                 <label for="attachment" class="attachment-btn" title="Attach File">
                                     <i class="fas fa-paperclip"></i>
-                                    <input type="file" id="attachment" name="attachment" multiple accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" style="display: none;">
+                                    <input type="file" id="attachment" name="attachment" multiple accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.zip,.rar" style="display: none;">
                                 </label>
                             </div>
                             <div id="attachment-list" class="attachment-list"></div>

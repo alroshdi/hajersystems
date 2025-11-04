@@ -557,13 +557,13 @@ section {
 /* ===== Projects Section ===== */
 .projects {
     background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
-    padding: 5rem 0;
+    padding: 4rem 0;
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
 }
 
 .project-card {
@@ -586,7 +586,7 @@ section {
 
 .project-header {
     background: linear-gradient(135deg, #4A90E2, #357ABD);
-    padding: 2rem;
+    padding: 1.5rem;
     color: var(--white);
     position: relative;
     overflow: hidden;
@@ -608,23 +608,23 @@ section {
 }
 
 .project-header h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
     font-weight: 700;
     position: relative;
     z-index: 1;
 }
 
 .project-header i {
-    font-size: 2.5rem;
-    margin-bottom: 0.8rem;
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
     position: relative;
     z-index: 1;
     opacity: 0.95;
 }
 
 .project-body {
-    padding: 2rem;
+    padding: 1.5rem;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -632,14 +632,14 @@ section {
 
 .project-body p {
     color: var(--text-light);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
     flex: 1;
 }
 
 .project-footer {
-    padding: 1.5rem 2rem;
+    padding: 1.2rem 1.5rem;
     background: #F8F9FA;
     display: flex;
     justify-content: space-between;
@@ -651,7 +651,7 @@ section {
     color: #4A90E2;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -673,11 +673,11 @@ section {
 }
 
 .project-language {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
     font-weight: 500;
     background: rgba(74, 144, 226, 0.1);
-    padding: 6px 12px;
+    padding: 5px 10px;
     border-radius: 6px;
 }
 

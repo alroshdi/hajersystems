@@ -490,32 +490,36 @@ console.log('Portfolio website loaded successfully! 🚀');
 (function() {
     const attachmentInput = document.getElementById('attachment');
     const attachmentList = document.getElementById('attachment-list');
-    let attachedFiles = [];
+    window.attachedFiles = [];
     
     if (attachmentInput && attachmentList) {
         attachmentInput.addEventListener('change', function(e) {
             const files = Array.from(e.target.files);
             
             files.forEach(file => {
-                if (attachedFiles.length < 5) { // Limit to 5 files
-                    attachedFiles.push(file);
-                    const attachmentItem = document.createElement('div');
-                    attachmentItem.className = 'attachment-item';
-                    attachmentItem.innerHTML = `
-                        <i class="fas fa-file"></i>
-                        <span>${file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name}</span>
-                        <span class="remove-attachment" data-filename="${file.name}">×</span>
-                    `;
-                    attachmentList.appendChild(attachmentItem);
-                    
-                    // Remove attachment handler
-                    const removeBtn = attachmentItem.querySelector('.remove-attachment');
-                    removeBtn.addEventListener('click', function() {
-                        const filename = this.getAttribute('data-filename');
-                        attachedFiles = attachedFiles.filter(f => f.name !== filename);
-                        attachmentItem.remove();
-                        updateFileInput();
-                    });
+                if (window.attachedFiles.length < 5) { // Limit to 5 files
+                    // Check if file already exists
+                    const exists = window.attachedFiles.some(f => f.name === file.name && f.size === file.size);
+                    if (!exists) {
+                        window.attachedFiles.push(file);
+                        const attachmentItem = document.createElement('div');
+                        attachmentItem.className = 'attachment-item';
+                        attachmentItem.innerHTML = `
+                            <i class="fas fa-file"></i>
+                            <span>${file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name}</span>
+                            <span class="remove-attachment" data-filename="${file.name}">×</span>
+                        `;
+                        attachmentList.appendChild(attachmentItem);
+                        
+                        // Remove attachment handler
+                        const removeBtn = attachmentItem.querySelector('.remove-attachment');
+                        removeBtn.addEventListener('click', function() {
+                            const filename = this.getAttribute('data-filename');
+                            window.attachedFiles = window.attachedFiles.filter(f => f.name !== filename);
+                            attachmentItem.remove();
+                            updateFileInput();
+                        });
+                    }
                 } else {
                     alert('Maximum 5 files allowed');
                 }
@@ -526,11 +530,19 @@ console.log('Portfolio website loaded successfully! 🚀');
         
         function updateFileInput() {
             const dataTransfer = new DataTransfer();
-            attachedFiles.forEach(file => {
+            window.attachedFiles.forEach(file => {
                 dataTransfer.items.add(file);
             });
             attachmentInput.files = dataTransfer.files;
+            
+            // Ensure the input is properly set for form submission
+            if (window.attachedFiles.length > 0) {
+                attachmentInput.setAttribute('multiple', 'multiple');
+            }
         }
+        
+        // Expose updateFileInput for form submission
+        window.updateAttachmentInput = updateFileInput;
     }
 })();
 
@@ -544,6 +556,7 @@ console.log('Portfolio website loaded successfully! 🚀');
         // Set form action to FormSubmit (works without any setup)
         contactForm.action = 'https://formsubmit.co/hajeralroshdi@gmail.com';
         contactForm.method = 'POST';
+        contactForm.enctype = 'multipart/form-data';
         
         // Add hidden fields for FormSubmit
         const hiddenInput = document.createElement('input');
@@ -565,6 +578,16 @@ console.log('Portfolio website loaded successfully! 🚀');
         contactForm.appendChild(hiddenInput3);
         
         contactForm.addEventListener('submit', function(e) {
+            // Ensure attachments are properly set before submission
+            if (window.updateAttachmentInput) {
+                window.updateAttachmentInput();
+            }
+            
+            // Verify form has enctype for file uploads
+            if (!contactForm.enctype || contactForm.enctype !== 'multipart/form-data') {
+                contactForm.enctype = 'multipart/form-data';
+            }
+            
             // Save current scroll position
             const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
             sessionStorage.setItem('contactFormScrollPos', scrollPosition);
