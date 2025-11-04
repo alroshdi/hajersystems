@@ -323,6 +323,36 @@
         <div class="datum_container">
             <h2 class="section-title" data-en="Get In Touch" data-ar="تواصل معي">Get In Touch</h2>
             <p class="contact-subtitle" data-en="I'm available for freelance opportunities. Let's discuss your project!" data-ar="أنا متاحة لفرص العمل الحر. دعنا نناقش مشروعك!">I'm available for freelance opportunities. Let's discuss your project!</p>
+            
+            <!-- Contact Form -->
+            <div class="contact-form-wrapper slide-up">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" data-en="Your Name" data-ar="اسمك">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-en="Your Email" data-ar="بريدك الإلكتروني">Your Email</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" data-en="Subject" data-ar="الموضوع">Subject</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Project Inquiry">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-en="Message" data-ar="الرسالة">Message</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span data-en="Send Message" data-ar="إرسال الرسالة">Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <div id="formStatus" class="form-status"></div>
+                </form>
+            </div>
+
             <div class="contact-info slide-up">
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
@@ -365,6 +395,9 @@
         </div>
     </footer>
 
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
     <!-- Script -->
     <script src="script.js"></script>
 </body>
