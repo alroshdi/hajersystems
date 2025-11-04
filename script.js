@@ -475,6 +475,65 @@ document.head.appendChild(style);
 
 console.log('Portfolio website loaded successfully! 🚀');
 
+// ===== Auto-resize Textarea =====
+(function() {
+    const messageTextarea = document.getElementById('message');
+    if (messageTextarea) {
+        messageTextarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 300) + 'px';
+        });
+    }
+})();
+
+// ===== Attachment Handler =====
+(function() {
+    const attachmentInput = document.getElementById('attachment');
+    const attachmentList = document.getElementById('attachment-list');
+    let attachedFiles = [];
+    
+    if (attachmentInput && attachmentList) {
+        attachmentInput.addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            
+            files.forEach(file => {
+                if (attachedFiles.length < 5) { // Limit to 5 files
+                    attachedFiles.push(file);
+                    const attachmentItem = document.createElement('div');
+                    attachmentItem.className = 'attachment-item';
+                    attachmentItem.innerHTML = `
+                        <i class="fas fa-file"></i>
+                        <span>${file.name.length > 20 ? file.name.substring(0, 20) + '...' : file.name}</span>
+                        <span class="remove-attachment" data-filename="${file.name}">×</span>
+                    `;
+                    attachmentList.appendChild(attachmentItem);
+                    
+                    // Remove attachment handler
+                    const removeBtn = attachmentItem.querySelector('.remove-attachment');
+                    removeBtn.addEventListener('click', function() {
+                        const filename = this.getAttribute('data-filename');
+                        attachedFiles = attachedFiles.filter(f => f.name !== filename);
+                        attachmentItem.remove();
+                        updateFileInput();
+                    });
+                } else {
+                    alert('Maximum 5 files allowed');
+                }
+            });
+            
+            updateFileInput();
+        });
+        
+        function updateFileInput() {
+            const dataTransfer = new DataTransfer();
+            attachedFiles.forEach(file => {
+                dataTransfer.items.add(file);
+            });
+            attachmentInput.files = dataTransfer.files;
+        }
+    }
+})();
+
 // ===== Contact Form with FormSubmit (Works Immediately) =====
 (function() {
     const contactForm = document.getElementById('contactForm');

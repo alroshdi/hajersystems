@@ -273,26 +273,47 @@
             <h2 class="section-title" data-en="Work Experience" data-ar="الخبرة العملية">Work Experience</h2>
             <div class="timeline">
                 <div class="timeline-item slide-up">
-                    <div class="timeline-dot"></div>
+                    <div class="timeline-dot">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
                     <div class="timeline-content">
-                        <h3 data-en="Freelance Developer & Data Scientist" data-ar="مطورة مستقلة وعالمة بيانات">Freelance Developer & Data Scientist</h3>
-                        <span class="timeline-period" data-en="Present" data-ar="حالياً">Present</span>
+                        <div class="timeline-header">
+                            <i class="fas fa-laptop-code timeline-icon"></i>
+                            <div>
+                                <h3 data-en="Freelance Developer & Data Scientist" data-ar="مطورة مستقلة وعالمة بيانات">Freelance Developer & Data Scientist</h3>
+                                <span class="timeline-period" data-en="Present" data-ar="حالياً">Present</span>
+                            </div>
+                        </div>
                         <p data-en="Building custom solutions for clients, including backend systems, data processing pipelines, and interactive dashboards. Skilled at helping businesses leverage their data to gain actionable insights and make informed, data-driven decisions." data-ar="بناء حلول مخصصة للعملاء، بما في ذلك أنظمة خلفية وخطوط أنابيب معالجة البيانات ولوحات معلومات تفاعلية. ماهرة في مساعدة الشركات على الاستفادة من بياناتها للحصول على رؤى قابلة للتنفيذ واتخاذ قرارات مدروسة مدفوعة بالبيانات.">Building custom solutions for clients, including backend systems, data processing pipelines, and interactive dashboards. Skilled at helping businesses leverage their data to gain actionable insights and make informed, data-driven decisions.</p>
                     </div>
                 </div>
                 <div class="timeline-item slide-up">
-                    <div class="timeline-dot"></div>
+                    <div class="timeline-dot">
+                        <i class="fas fa-server"></i>
+                    </div>
                     <div class="timeline-content">
-                        <h3 data-en="Backend Software Developer" data-ar="مطورة برمجيات خلفية">Backend Software Developer</h3>
-                        <span class="timeline-period" data-en="2+ Years Experience" data-ar="خبرة أكثر من سنتين">2+ Years Experience</span>
+                        <div class="timeline-header">
+                            <i class="fas fa-server timeline-icon"></i>
+                            <div>
+                                <h3 data-en="Backend Software Developer" data-ar="مطورة برمجيات خلفية">Backend Software Developer</h3>
+                                <span class="timeline-period" data-en="2+ Years Experience" data-ar="خبرة أكثر من سنتين">2+ Years Experience</span>
+                            </div>
+                        </div>
                         <p data-en="Developed robust backend systems using Python and C#. Built REST APIs, implemented database solutions with SQL Server, and created efficient ETL pipelines. Worked on multiple projects involving .NET Framework and ASP.NET MVC." data-ar="طورت أنظمة خلفية قوية باستخدام Python و C#. بنيت واجهات برمجة REST، نفذت حلول قواعد بيانات مع SQL Server، وأنشأت خطوط أنابيب ETL فعالة. عملت على مشاريع متعددة تتضمن .NET Framework و ASP.NET MVC.">Developed robust backend systems using Python and C#. Built REST APIs, implemented database solutions with SQL Server, and created efficient ETL pipelines. Worked on multiple projects involving .NET Framework and ASP.NET MVC.</p>
                     </div>
                 </div>
                 <div class="timeline-item slide-up">
-                    <div class="timeline-dot"></div>
+                    <div class="timeline-dot">
+                        <i class="fas fa-brain"></i>
+                    </div>
                     <div class="timeline-content">
-                        <h3 data-en="Data Science & AI Training" data-ar="تدريب علم البيانات والذكاء الاصطناعي">Data Science & AI Training</h3>
-                        <span class="timeline-period" data-en="6 Months Intensive Training" data-ar="تدريب مكثف 6 أشهر">6 Months Intensive Training</span>
+                        <div class="timeline-header">
+                            <i class="fas fa-brain timeline-icon"></i>
+                            <div>
+                                <h3 data-en="Data Science & AI Training" data-ar="تدريب علم البيانات والذكاء الاصطناعي">Data Science & AI Training</h3>
+                                <span class="timeline-period" data-en="6 Months Intensive Training" data-ar="تدريب مكثف 6 أشهر">6 Months Intensive Training</span>
+                            </div>
+                        </div>
                         <p data-en="Completed comprehensive training in Data Science and AI. Built machine learning models, created data visualizations, and developed predictive analytics solutions using advanced tools and techniques." data-ar="أكملت تدريباً شاملاً في علم البيانات والذكاء الاصطناعي. بنيت نماذج التعلم الآلي وأنشأت تصورات بيانات وطورت حلول تحليلات تنبؤية باستخدام أدوات وتقنيات متقدمة.">Completed comprehensive training in Data Science and AI. Built machine learning models, created data visualizations, and developed predictive analytics solutions using advanced tools and techniques.</p>
                     </div>
                 </div>
@@ -341,7 +362,14 @@
                         </div>
                         <div class="form-group">
                             <label for="message" data-en="Message" data-ar="الرسالة">Message</label>
-                            <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project..."></textarea>
+                            <div class="textarea-wrapper">
+                                <textarea id="message" name="message" rows="3" required placeholder="Tell me about your project..."></textarea>
+                                <label for="attachment" class="attachment-btn" title="Attach File">
+                                    <i class="fas fa-paperclip"></i>
+                                    <input type="file" id="attachment" name="attachment" multiple accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" style="display: none;">
+                                </label>
+                            </div>
+                            <div id="attachment-list" class="attachment-list"></div>
                         </div>
                         <button type="submit" class="btn btn-primary" id="submitBtn">
                             <span data-en="Send Message" data-ar="إرسال الرسالة">Send Message</span>
