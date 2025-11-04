@@ -8,6 +8,8 @@ A beautiful, bilingual (English/Arabic) personal portfolio website showcasing pr
 - **Responsive Design**: Works perfectly on mobile, tablet, and desktop devices
 - **Modern UI**: Beautiful pastel color scheme (pink, lavender, sky blue)
 - **GitHub Integration**: Automatically fetches and displays your public repositories
+- **Contact Form**: Working contact form that sends emails directly to your inbox
+- **Freelance Services Section**: Showcase your services with a clean, minimalist design
 - **Smooth Animations**: Scroll animations and hover effects throughout
 - **Easy to Customize**: Clean, well-commented code
 
@@ -18,13 +20,19 @@ CV/
 ├── index.html          # Main HTML file
 ├── style.css           # All styles and animations
 ├── script.js           # JavaScript functionality
-├── README.md          # This file
+├── README.md           # This file
+├── image/              # Images folder
+│   ├── background.jpg
+│   ├── github icon.png
+│   ├── linkedin icon.png
+│   └── HAJER logo.png
 └── HajerAlroshdi_CV.pdf # Your CV (for download button)
 ```
 
 ## 🚀 Getting Started
 
 ### Option 1: Open Directly in Browser
+
 Simply open `index.html` in your web browser to view the portfolio.
 
 ### Option 2: Using a Local Server (Recommended)
@@ -53,37 +61,159 @@ http-server
 2. Right-click on `index.html`
 3. Select "Open with Live Server"
 
+## 🚀 Deployment to GitHub Pages
+
+### Quick Deploy Steps:
+
+1. **Push to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Deploy portfolio"
+   git push origin main
+   ```
+
+2. **Enable GitHub Pages:**
+   - Go to your repository on GitHub
+   - Click **Settings** → **Pages**
+   - Under **Source**, select **Deploy from a branch**
+   - Select branch: **main**
+   - Select folder: **/ (root)**
+   - Click **Save**
+
+3. **Your site will be live at:**
+   - `https://alroshdi.github.io/hajersystems` (current repo name)
+   - Or `https://alroshdi.github.io` (if repo is named `alroshdi.github.io`)
+
+### Renaming Repository for Simple URL
+
+To get a simple URL like `https://alroshdi.github.io`:
+
+1. Go to your repository: https://github.com/alroshdi/hajersystems/settings
+2. Scroll to **Repository name** section
+3. Change to: `alroshdi.github.io` (must match your GitHub username exactly)
+4. Click **Rename**
+5. Update local remote:
+   ```bash
+   git remote set-url origin https://github.com/alroshdi/alroshdi.github.io.git
+   ```
+
+**Note:** Repository must be public for free GitHub Pages hosting.
+
+## 📧 Contact Form Setup
+
+The contact form uses **FormSubmit.co** and works immediately without any setup!
+
+### Current Configuration:
+- **Email:** `hajeralroshdi@gmail.com`
+- **Service:** FormSubmit (free, 50 submissions/month)
+- **Status:** ✅ Active and working
+
+### How It Works:
+1. Form submissions are sent to FormSubmit
+2. FormSubmit forwards emails to `hajeralroshdi@gmail.com`
+3. No account or API keys needed
+
+### Alternative: EmailJS Setup (Optional)
+
+If you prefer EmailJS for more control:
+
+1. **Create EmailJS Account:**
+   - Go to [https://www.emailjs.com/](https://www.emailjs.com/)
+   - Sign up for free account (200 emails/month)
+
+2. **Create Email Service:**
+   - Go to **Email Services** → **Add New Service**
+   - Choose **Gmail** and connect your account
+
+3. **Create Email Template:**
+   - Go to **Email Templates** → **Create New Template**
+   - Subject: `New Contact Form Message: {{subject}}`
+   - Content: Include `{{from_name}}`, `{{from_email}}`, `{{subject}}`, `{{message}}`
+
+4. **Get Credentials:**
+   - **Public Key:** Account → General → Public Key
+   - **Service ID:** From Email Services
+   - **Template ID:** From Email Templates
+
+5. **Update script.js:**
+   - Uncomment the EmailJS code section
+   - Replace `YOUR_PUBLIC_KEY`, `YOUR_SERVICE_ID`, `YOUR_TEMPLATE_ID`
+   - Comment out the FormSubmit section
+
+## 🌐 Custom Domain Setup
+
+### Step 1: Register Your Domain
+
+**Option A: Free Domain (Freenom)**
+- Visit [Freenom](https://www.freenom.com)
+- Register a free domain (`.tk`, `.ml`, `.ga`, `.cf`)
+
+**Option B: Paid Domain (Namecheap)**
+- Visit [Namecheap](https://www.namecheap.com)
+- Register a domain (~$10-15/year)
+
+### Step 2: Configure DNS Records
+
+Add these DNS records in your domain provider:
+
+**A Records (4 IPs):**
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
+
+**CNAME Record:**
+```
+www → alroshdi.github.io
+```
+
+### Step 3: Update GitHub
+
+1. **Update CNAME file** in repository with your domain
+2. **GitHub Pages Settings:**
+   - Go to Settings → Pages
+   - Enter your custom domain
+   - Check "Enforce HTTPS" (after DNS propagates)
+
+3. **Wait 10-15 minutes** for DNS propagation and SSL certificate
+
+### Step 4: Verify
+
+- Visit your custom domain
+- Check DNS: [whatsmydns.net](https://www.whatsmydns.net)
+
 ## 🎨 Customization Guide
 
 ### 1. Update Contact Information
 
-Edit `index.html` and update the contact details:
+Edit `index.html` and update:
 ```html
-<!-- Around line 260 -->
-<a href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a>
-<a href="tel:+968XXXXXXXXX">+968 XXX XXX XXX</a>
+<a href="mailto:hajeralroshdi@gmail.com">hajeralroshdi@gmail.com</a>
+<a href="tel:+96894626062">+968 94626062</a>
 ```
 
-### 2. Change Profile Photo
+### 2. Change GitHub Username
 
-Replace the placeholder image in `index.html`:
-```html
-<!-- Around line 70 -->
-<img src="path/to/your/photo.jpg" alt="Hajer Alroshdi">
+Update `script.js`:
+```javascript
+const githubUsername = 'alroshdi'; // Your GitHub username
 ```
 
 ### 3. Update Personal Information
 
-Edit the About Me section and other personal details in `index.html`:
+Edit sections in `index.html`:
 - Hero section (name, title, intro)
 - About section
 - Skills section
 - Experience section
 - Education section
+- Freelance Services section
 
 ### 4. Modify Colors
 
-Update the CSS variables in `style.css`:
+Update CSS variables in `style.css`:
 ```css
 :root {
     --primary-pink: #FFB6C1;
@@ -93,11 +223,18 @@ Update the CSS variables in `style.css`:
 }
 ```
 
-### 5. GitHub Username
+### 5. Configure Projects
 
-The script automatically uses your GitHub username (`alroshdi92`). If you want to change it, update `script.js`:
+Edit `script.js`:
 ```javascript
-const githubUsername = 'YOUR_GITHUB_USERNAME';
+// Repositories to exclude
+const excludedRepos = ['hajeralroshdi.github.io', 'ai_workshop_app'];
+
+// Repositories to prioritize
+const prioritizedRepos = ['TaxAuthorityProject', 'predict_sales_lstm'];
+
+// Maximum projects to display
+const maxProjects = 3;
 ```
 
 ## 🌐 Language Switching
@@ -120,26 +257,30 @@ The website includes a language toggle button in the top right corner:
 - **JavaScript**: Interactive features and GitHub API integration
 - **Font Awesome**: Icons
 - **Google Fonts**: Poppins (English) and Cairo (Arabic)
+- **FormSubmit**: Contact form email service
 
 ## 📝 Important Notes
 
 1. **GitHub API**: The website fetches your repositories from GitHub's public API. Make sure your repositories have descriptions for best display.
 
-2. **CV Download**: Update the `href` attribute in the Download Resume button to point to your actual CV PDF file.
+2. **Browser Compatibility**: Modern browsers (Chrome, Firefox, Safari, Edge) are supported.
 
-3. **Browser Compatibility**: Modern browsers (Chrome, Firefox, Safari, Edge) are supported.
+3. **CORS**: When testing locally, you may need to use a local server to avoid CORS issues with the GitHub API.
 
-4. **CORS**: When testing locally, you may need to use a local server to avoid CORS issues with the GitHub API.
+4. **Contact Form**: Currently uses FormSubmit.co (free, 50 submissions/month). No setup required!
 
-## 🎯 Future Enhancements
+5. **GitHub Pages**: Repository must be public for free hosting.
 
-Consider adding:
-- Contact form with email integration
-- Blog section
-- Testimonials section
-- More detailed project pages
-- Dark mode toggle
-- Additional language support
+## 🎯 Project Features
+
+- ✅ Bilingual support (English/Arabic)
+- ✅ Responsive design
+- ✅ GitHub repository integration
+- ✅ Contact form with email delivery
+- ✅ Freelance services showcase
+- ✅ Smooth scroll animations
+- ✅ Project prioritization system
+- ✅ Manual project fallback
 
 ## 📄 License
 
@@ -149,9 +290,9 @@ This portfolio template is free to use and modify for personal use.
 
 For questions or issues, feel free to reach out via:
 - **LinkedIn**: [alroshdi](https://www.linkedin.com/in/alroshdi/)
-- **GitHub**: [@alroshdi92](https://github.com/alroshdi92)
+- **GitHub**: [@alroshdi](https://github.com/alroshdi)
+- **Email**: hajeralroshdi@gmail.com
 
 ---
 
 **Made with ❤️ by Hajer Alroshdi**
-

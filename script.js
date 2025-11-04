@@ -435,11 +435,71 @@ document.head.appendChild(style);
 
 console.log('Portfolio website loaded successfully! 🚀');
 
-// ===== Contact Form with EmailJS =====
+// ===== Contact Form with FormSubmit (Works Immediately) =====
+(function() {
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (contactForm) {
+        // Set form action to FormSubmit (works without any setup)
+        contactForm.action = 'https://formsubmit.co/hajeralroshdi@gmail.com';
+        contactForm.method = 'POST';
+        
+        // Add hidden fields for FormSubmit
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = '_subject';
+        hiddenInput.value = 'New Contact Form Message from Portfolio';
+        contactForm.appendChild(hiddenInput);
+        
+        const hiddenInput2 = document.createElement('input');
+        hiddenInput2.type = 'hidden';
+        hiddenInput2.name = '_captcha';
+        hiddenInput2.value = 'false';
+        contactForm.appendChild(hiddenInput2);
+        
+        const hiddenInput3 = document.createElement('input');
+        hiddenInput3.type = 'hidden';
+        hiddenInput3.name = '_next';
+        hiddenInput3.value = window.location.href + '?success=true';
+        contactForm.appendChild(hiddenInput3);
+        
+        contactForm.addEventListener('submit', function(e) {
+            // Show sending status
+            formStatus.className = 'form-status sending';
+            formStatus.innerHTML = currentLang === 'en' 
+                ? '<i class="fas fa-spinner fa-spin"></i> Sending your message...'
+                : '<i class="fas fa-spinner fa-spin"></i> جاري إرسال رسالتك...';
+            submitBtn.disabled = true;
+            
+            // Form will submit normally to FormSubmit
+            // Success message will be shown after redirect
+        });
+        
+        // Check if form was submitted successfully (redirected back)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            formStatus.className = 'form-status success';
+            formStatus.innerHTML = currentLang === 'en'
+                ? '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you soon.'
+                : '<i class="fas fa-check-circle"></i> تم إرسال الرسالة بنجاح! سأتواصل معك قريباً.';
+            
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+            
+            // Hide status after 5 seconds
+            setTimeout(() => {
+                formStatus.className = 'form-status';
+                formStatus.innerHTML = '';
+            }, 5000);
+        }
+    }
+})();
+
+/* ===== Alternative: EmailJS Setup (Uncomment and configure if you prefer EmailJS) =====
 (function() {
     // Initialize EmailJS
-    // NOTE: You need to replace these with your EmailJS credentials
-    // Get them from: https://dashboard.emailjs.com/admin/integration
     emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS Public Key
     
     const contactForm = document.getElementById('contactForm');
@@ -450,16 +510,14 @@ console.log('Portfolio website loaded successfully! 🚀');
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Get form values
             const formData = {
                 from_name: document.getElementById('name').value,
                 from_email: document.getElementById('email').value,
                 subject: document.getElementById('subject').value,
                 message: document.getElementById('message').value,
-                to_email: 'hajeralroshdi99@gmail.com' // Your email address
+                to_email: 'hajeralroshdi@gmail.com'
             };
             
-            // Show sending status
             formStatus.className = 'form-status sending';
             formStatus.innerHTML = currentLang === 'en' 
                 ? '<i class="fas fa-spinner fa-spin"></i> Sending your message...'
@@ -467,11 +525,9 @@ console.log('Portfolio website loaded successfully! 🚀');
             submitBtn.disabled = true;
             
             try {
-                // Send email using EmailJS
-                // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
                 const response = await emailjs.send(
-                    'YOUR_SERVICE_ID',    // Replace with your EmailJS Service ID
-                    'YOUR_TEMPLATE_ID',   // Replace with your EmailJS Template ID
+                    'YOUR_SERVICE_ID',
+                    'YOUR_TEMPLATE_ID',
                     {
                         from_name: formData.from_name,
                         from_email: formData.from_email,
@@ -481,16 +537,13 @@ console.log('Portfolio website loaded successfully! 🚀');
                     }
                 );
                 
-                // Success
                 formStatus.className = 'form-status success';
                 formStatus.innerHTML = currentLang === 'en'
                     ? '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you soon.'
                     : '<i class="fas fa-check-circle"></i> تم إرسال الرسالة بنجاح! سأتواصل معك قريباً.';
                 
-                // Reset form
                 contactForm.reset();
                 
-                // Hide status after 5 seconds
                 setTimeout(() => {
                     formStatus.className = 'form-status';
                     formStatus.innerHTML = '';
@@ -498,8 +551,6 @@ console.log('Portfolio website loaded successfully! 🚀');
                 
             } catch (error) {
                 console.error('EmailJS Error:', error);
-                
-                // Error handling
                 formStatus.className = 'form-status error';
                 formStatus.innerHTML = currentLang === 'en'
                     ? '<i class="fas fa-exclamation-circle"></i> Failed to send message. Please try again or email me directly.'
@@ -510,4 +561,5 @@ console.log('Portfolio website loaded successfully! 🚀');
         });
     }
 })();
+*/
 
