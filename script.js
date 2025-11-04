@@ -325,6 +325,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update language for loading message
     updateLanguage();
     
+    // Check for stored success message on page load
+    const formStatus = document.getElementById('formStatus');
+    const storedSuccessMessage = localStorage.getItem('formSubmitSuccess');
+    if (storedSuccessMessage && formStatus) {
+        // Update message based on current language
+        const message = currentLang === 'en'
+            ? 'Message sent successfully to Hajer Systems!'
+            : 'تم إرسال الرسالة بنجاح إلى Hajer Systems!';
+        formStatus.className = 'form-status success';
+        formStatus.innerHTML = `
+            <i class="fas fa-check-circle"></i> ${message}
+            <button class="dismiss-btn" onclick="dismissSuccessMessage()" aria-label="Dismiss">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+    }
+    
     // Add scroll event for parallax effect on hero section
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
@@ -480,20 +497,42 @@ console.log('Portfolio website loaded successfully! 🚀');
         // Check if form was submitted successfully (redirected back)
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('success') === 'true') {
-            formStatus.className = 'form-status success';
-            formStatus.innerHTML = currentLang === 'en'
-                ? '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you soon.'
-                : '<i class="fas fa-check-circle"></i> تم إرسال الرسالة بنجاح! سأتواصل معك قريباً.';
+            const successMessage = currentLang === 'en'
+                ? 'Message sent successfully to Hajer Systems!'
+                : 'تم إرسال الرسالة بنجاح إلى Hajer Systems!';
+            
+            // Store in localStorage
+            localStorage.setItem('formSubmitSuccess', successMessage);
             
             // Clean URL
             window.history.replaceState({}, document.title, window.location.pathname);
-            
-            // Hide status after 5 seconds
-            setTimeout(() => {
+        }
+        
+        // Check localStorage on page load for success message
+        const storedSuccessMessage = localStorage.getItem('formSubmitSuccess');
+        if (storedSuccessMessage && formStatus) {
+            displaySuccessMessage(storedSuccessMessage);
+        }
+        
+        // Function to display success message with dismiss button
+        function displaySuccessMessage(message) {
+            formStatus.className = 'form-status success';
+            formStatus.innerHTML = `
+                <i class="fas fa-check-circle"></i> ${message}
+                <button class="dismiss-btn" onclick="dismissSuccessMessage()" aria-label="Dismiss">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+        }
+        
+        // Make dismiss function globally accessible
+        window.dismissSuccessMessage = function() {
+            if (formStatus) {
                 formStatus.className = 'form-status';
                 formStatus.innerHTML = '';
-            }, 5000);
-        }
+            }
+            localStorage.removeItem('formSubmitSuccess');
+        };
     }
 })();
 
