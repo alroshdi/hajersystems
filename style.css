@@ -777,18 +777,6 @@ section {
     padding: 0 2rem;
 }
 
-.services-grid::-webkit-scrollbar {
-    height: 6px;
-}
-
-.services-grid::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.services-grid::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-}
 
 .service-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
@@ -1004,11 +992,12 @@ section {
 @media (max-width: 1600px) {
     .services-grid {
         max-width: 1400px;
-        gap: 1rem;
+        gap: 1.8rem;
+        padding: 0 1.5rem;
     }
     
     .service-card-header-clickable {
-        padding: 1.3rem 0.9rem;
+        padding: 1.5rem 1rem;
     }
     
     .service-icon {
@@ -1044,10 +1033,11 @@ section {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
         max-width: 1200px;
+        padding: 0 1.5rem;
     }
     
     .service-card-header-clickable {
-        padding: 1.2rem 0.8rem;
+        padding: 1.3rem 1rem;
     }
 }
 
