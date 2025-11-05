@@ -679,6 +679,25 @@ function toggleExperience(headerElement) {
 // Make function globally accessible
 window.toggleExperience = toggleExperience;
 
+/* ===== Services Section Accordion ===== */
+function toggleService(headerElement) {
+    const card = headerElement.closest('.service-card');
+    const isExpanded = card.getAttribute('data-expanded') === 'true';
+    
+    // Toggle the expanded state
+    card.setAttribute('data-expanded', !isExpanded);
+    
+    // Smooth scroll to the card if it's being expanded
+    if (!isExpanded) {
+        setTimeout(() => {
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+}
+
+// Make function globally accessible
+window.toggleService = toggleService;
+
 /* ===== Alternative: EmailJS Setup (Uncomment and configure if you prefer EmailJS) =====
 (function() {
     // Initialize EmailJS
