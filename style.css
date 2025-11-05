@@ -1010,9 +1010,8 @@ section {
         gap: 1rem;
     }
     
-    .service-card {
+    .service-card-header-clickable {
         padding: 1.3rem 0.9rem;
-        min-height: 230px;
     }
     
     .service-icon {
@@ -1025,14 +1024,21 @@ section {
         font-size: 2.6rem;
     }
     
-    .service-card h3 {
+    .service-card-header-clickable h3 {
         font-size: 0.95rem;
         min-height: 2.6rem;
     }
     
-    .service-card p {
+    .service-card-body {
+        padding: 0 1rem;
+    }
+    
+    .service-card[data-expanded="true"] .service-card-body {
+        padding: 1rem;
+    }
+    
+    .service-card-body p {
         font-size: 0.8rem;
-        min-height: 2.8rem;
     }
 }
 
@@ -1043,9 +1049,8 @@ section {
         max-width: 1200px;
     }
     
-    .service-card {
+    .service-card-header-clickable {
         padding: 1.2rem 0.8rem;
-        min-height: 220px;
     }
 }
 
@@ -1056,8 +1061,7 @@ section {
         max-width: 1000px;
     }
     
-    .service-card {
-        min-height: 240px;
+    .service-card-header-clickable {
         padding: 1.5rem 1rem;
     }
     
@@ -1071,14 +1075,13 @@ section {
         font-size: 3rem;
     }
     
-    .service-card h3 {
+    .service-card-header-clickable h3 {
         font-size: 1.1rem;
         min-height: 2.6rem;
     }
     
-    .service-card p {
+    .service-card-body p {
         font-size: 0.9rem;
-        min-height: 3rem;
     }
 }
 
@@ -1088,19 +1091,17 @@ section {
         gap: 2rem;
     }
     
-    .service-card {
-        min-height: 260px;
+    .service-card-header-clickable {
         padding: 1.8rem 1.2rem;
     }
     
-    .service-card h3 {
+    .service-card-header-clickable h3 {
         font-size: 1.3rem;
         min-height: 2.6rem;
     }
     
-    .service-card p {
+    .service-card-body p {
         font-size: 0.9rem;
-        min-height: 3.2rem;
     }
 }
 
