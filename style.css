@@ -478,6 +478,53 @@ section {
     animation: expandLine 0.8s ease-out 0.3s both;
 }
 
+.section-title-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3.5rem;
+    gap: 1rem;
+}
+
+.expand-all-btn {
+    background: linear-gradient(135deg, #4A90E2, #6366F1, #8B5CF6);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.expand-all-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+.expand-all-btn.expanded #expandAllIcon {
+    transform: rotate(180deg);
+}
+
+#expandAllIcon {
+    transition: transform 0.3s ease;
+}
+
+[dir="rtl"] .expand-all-btn {
+    right: auto;
+    left: 0;
+}
+
 
 /* Animation for section titles */
 .animated-title {
@@ -1951,6 +1998,12 @@ section {
         font-size: 2.5rem;
     }
     
+    .expand-all-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+    }
+    
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -2048,6 +2101,16 @@ section {
     .section-title {
         font-size: 2rem;
         letter-spacing: 1.5px;
+    }
+    
+    .expand-all-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .section-title-wrapper {
+        gap: 0.5rem;
     }
     
     .btn {

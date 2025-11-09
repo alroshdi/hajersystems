@@ -728,6 +728,43 @@ function toggleService(headerElement) {
 // Make function globally accessible
 window.toggleService = toggleService;
 
+/* ===== Toggle All Services ===== */
+function toggleAllServices() {
+    const allServiceCards = document.querySelectorAll('.service-card');
+    const expandAllBtn = document.getElementById('expandAllBtn');
+    const expandAllIcon = document.getElementById('expandAllIcon');
+    
+    if (!allServiceCards.length) return;
+    
+    // Check if all are expanded or at least one is expanded
+    const allExpanded = Array.from(allServiceCards).every(card => 
+        card.getAttribute('data-expanded') === 'true'
+    );
+    
+    // Toggle all cards
+    allServiceCards.forEach((card, index) => {
+        const shouldExpand = !allExpanded;
+        card.setAttribute('data-expanded', shouldExpand);
+        
+        // Add a small delay for smooth animation
+        if (shouldExpand) {
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, index * 50);
+        }
+    });
+    
+    // Update button state
+    if (allExpanded) {
+        expandAllBtn.classList.remove('expanded');
+    } else {
+        expandAllBtn.classList.add('expanded');
+    }
+}
+
+// Make function globally accessible
+window.toggleAllServices = toggleAllServices;
+
 /* ===== Alternative: EmailJS Setup (Uncomment and configure if you prefer EmailJS) =====
 (function() {
     // Initialize EmailJS
