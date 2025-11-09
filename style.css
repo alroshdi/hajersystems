@@ -245,10 +245,23 @@ body::after {
     z-index: 1;
 }
 
+.title-with-logo {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.title-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
 .hero-text h1 {
     font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     background: linear-gradient(135deg, var(--primary-pink), var(--primary-sky));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1863,6 +1876,15 @@ section {
         text-align: center;
     }
     
+    .title-with-logo {
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .title-logo {
+        height: 45px;
+    }
+    
     .hero-text h1 {
         font-size: 2.5rem;
     }
@@ -1931,6 +1953,10 @@ section {
 }
 
 @media (max-width: 600px) {
+    .title-logo {
+        height: 35px;
+    }
+    
     .hero-text h1 {
         font-size: 2rem;
     }
